@@ -19,4 +19,13 @@ for i in range(n_student):
         marks.append(grade)
     student_record = [student_name] + marks
     report_cards.append(student_record)
-print(report_cards)
+# display the final report cads for each student
+print("\n-----------------------------------")
+print("Conratulations to all of the students!")
+print("Here are your 1st term Master Report Cards:")
+
+print("\n1st Term Report Cards:")
+for student in report_cards:
+    print(f"\nStudent Name: {student[0]}")
+    for i in range(1, len(student)):
+        print(f"{all_subjects[i-1]}: {student[i]}")
