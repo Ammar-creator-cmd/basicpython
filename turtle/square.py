@@ -41,7 +41,7 @@ turtle.reset()
 
 #activity 2: Polygon generator
 
-canvas.setup(500, 400)
+canvas.setup(500, 500)
 canvas.title("Polygon Generator")
 length = int(input("Enter the length of the polygon side: "))
 num_sides = int(input("Enter the number of sides: "))
