@@ -20,16 +20,16 @@ def set_alarm(alarm_time, sound_file):
             break
         time.sleep(1)
 
-# Set the alarm time and sound file
-alarm_time = input("Enter the alarm time (HH:MM:SS): ")
-sound_file = "gorila-315977.mp3"  # Ensure this file exists in the same directory or provide the full path
+if __name__ == "__main__":
+    # Input alarm time in 24-hour format
+    alarm_time = input("Enter the alarm time in 24-hour format (HH:MM:SS): ")
+    sound_file = "gorila-315977.mp3"  # Replace with your sound file path
 
-try:
-    datetime.datetime.strptime(alarm_time, "%H:%M:%S")  # Validate time format
-    set_alarm(alarm_time, sound_file)
-except ValueError:
-    print("Invalid time format. Please enter the time in HH:MM:SS format.")
-except FileNotFoundError:
-    print(f"Sound file '{sound_file}' not found.")
-finally:
-    pygame.quit()
+    try:
+        # Validate the time format
+        datetime.datetime.strptime(alarm_time, "%H:%M:%S")
+        set_alarm(alarm_time, sound_file)
+    except ValueError:
+        print("Invalid time format. Please enter the time in HH:MM:SS 24-hour format.")
+    finally:
+        pygame.quit()
