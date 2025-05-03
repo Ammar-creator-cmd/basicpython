@@ -63,6 +63,10 @@ def lowercheck():
        
 if __name__ == '__main__':
     # Uncomment one of the following lines to execute a function
+    filename = 'new_doc.txt'
+    filecsv = 'new_doc.csv'
+    write(filecsv, 'Hello, World! 4m4r')
+    read(filecsv)
     #write('test.txt', 'Hello, World! amar')
     #read('test.txt')
     #a()
