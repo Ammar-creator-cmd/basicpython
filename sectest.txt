@@ -1,0 +1,10 @@
+fibbonacci numbers
+palindromic numbers
+pi
+cube roots
+linear functions
+velocity formulae
+meters
+60 seconds
+physics
+arithmetics
