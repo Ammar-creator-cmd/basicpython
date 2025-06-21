@@ -49,9 +49,11 @@ class TicTacToe:
             self.end_game("It's a draw!")
             return True
         return False
-    
 
-        
+    def end_game(self, message):
+        messagebox.showinfo("Game Over", message)
+        for btn in self.button:
+            btn.config(state="disabled")
 
 if __name__ == "__main__":
     root = tk.Tk()
