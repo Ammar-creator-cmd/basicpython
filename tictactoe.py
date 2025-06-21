@@ -54,6 +54,19 @@ class TicTacToe:
         messagebox.showinfo("Game Over", message)
         for btn in self.button:
             btn.config(state="disabled")
+        print("Would you like to play again? (Yes/No)")
+
+        response = input().strip().lower()
+        if response == "yes":
+            self.reset_game()
+        else:
+            self.root.quit()
+
+    def reset_game(self):
+        self.board = [" " for _ in range(9)]
+        for btn in self.button:
+            btn.config(text="", state="normal")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
