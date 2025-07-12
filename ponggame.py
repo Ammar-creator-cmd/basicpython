@@ -13,7 +13,7 @@ BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
-#PADDEL PROPERTIES
+#PADDLE PROPERTIES
 PADDLE_WIDTH, PADDLE_HEIGHT = 20, 100   
 PADDLE_SPEED = 7
 
@@ -34,12 +34,12 @@ clock = pygame.time.Clock()
 
 #GAME CLASS
 
-class Paddel:
-    def __init__(self,x,y,color):
+class Paddle:
+    def __init__(self, x, y, color):
         self.rect = pygame.Rect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT)
         self.color = color
 
-    def draw(self,surface):
+    def draw(self, surface):
         pygame.draw.rect(surface, self.color, self.rect)
 
     def move(self, dy):
@@ -57,7 +57,7 @@ class Paddel:
             self.move(-PADDLE_SPEED)
 
 class Ball:
-    def __init__(self, x, y,color):
+    def __init__(self, x, y, color):
         self.rect = pygame.Rect(x, y, BALL_SIZE, BALL_SIZE)
         self.color = color
         self.dx = BALL_SPEED_X * random.choice((1, -1))  # Randomize initial horizontal direction
@@ -79,8 +79,7 @@ class Ball:
         # Check for collision with paddle
         if self.rect.colliderect(paddle.rect):
             self.dx *= -1
-            
-            self.dy += random.uniform(-1,1) *0,5
+            self.dy += random.uniform(-1, 1) * 0.5
             self.dy = max(-BALL_SPEED_Y * 1.5, min(BALL_SPEED_Y * 1.5, self.dy))
 
     def reset(self):
@@ -89,8 +88,8 @@ class Ball:
         self.dy = BALL_SPEED_Y * random.choice((1, -1))
 
 def reset_game():
-    player_paddle = Paddel(50, HEIGHT // 2 - PADDLE_HEIGHT // 2, GREEN)
-    ai_paddle = Paddel(WIDTH - 50 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 2, BLUE)
+    player_paddle = Paddle(50, HEIGHT // 2 - PADDLE_HEIGHT // 2, GREEN)
+    ai_paddle = Paddle(WIDTH - 50 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 2, BLUE)
     ball = Ball(WIDTH // 2, HEIGHT // 2, WHITE)
     return player_paddle, ai_paddle, ball
 
@@ -146,10 +145,6 @@ while running:
                 game_active = False
             ball.reset()
 
-
-
-
-
     #drawing
     screen.fill(BLACK)
 
@@ -157,6 +152,32 @@ while running:
     player_paddle.draw(screen)
     ai_paddle.draw(screen)
     ball.draw(screen)
+
+    #draw centre line (dashed line)
+    for i in range(0, HEIGHT, 20):
+        pygame.draw.line(screen, WHITE, (WIDTH // 2, i), (WIDTH // 2, i + 10), 1)
+
+    #draw scores
+    SCORE_FONT = pygame.font.Font(None, 60)
+    MESSAGE_FONT = pygame.font.Font(None, 40)
+    player_text = SCORE_FONT.render(str(player_score), True, GREEN)
+    ai_text = SCORE_FONT.render(str(ai_score), True, BLUE)
+    screen.blit(player_text, (WIDTH // 4, 20))
+    screen.blit(ai_text, (WIDTH * 3 // 4 - ai_text.get_width(), 20))
+
+    #draw game message
+    if not game_active:
+        if player_score >= max_score:
+            message = "You Win! " \
+            "Press SPACE to Restart"
+        elif ai_score >= max_score:
+            message = "AI Wins! " \
+            "Press SPACE to Restart"
+        else:
+            message = "Press SPACE to Start"
+        message_text = MESSAGE_FONT.render(message, True, WHITE)
+        text_rect = message_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        screen.blit(message_text, text_rect)
 
     #update display
     pygame.display.flip()
