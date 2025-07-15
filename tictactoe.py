@@ -60,7 +60,7 @@ class TicTacToe:
         if response == "yes":
             self.reset_game()
         else:
-            self.root.quit()
+            print("Thanks for playing!")
 
     def reset_game(self):
         self.board = [" " for _ in range(9)]
