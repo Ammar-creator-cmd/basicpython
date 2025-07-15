@@ -61,7 +61,7 @@ class TicTacToe:
             self.reset_game()
         else:
             print("Thanks for playing!")
-
+        self.root.quit()
     def reset_game(self):
         self.board = [" " for _ in range(9)]
         for btn in self.button:
