@@ -75,11 +75,10 @@ while not game_over:
 
 
     spinner_text = font.render(f"Spinner Speed: {spinner_rotation_speed}", True, BLACK)
-    window.blit(spinner_text, (300, 10))
+    window.blit(spinner_text, (10, 10))
     pygame.display.update()
     pygame.time.delay(30)
 
 pygame.quit()
-pygame.exit()
 
     
